@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace String_Helper_Project
 {
-    public class Functions
+    public class StringFunctions
     {
         /// <summary>
         /// takes a reference in memory to a string and calculates its start and end index for use in for loops (quick .Trim());
@@ -38,6 +38,29 @@ namespace String_Helper_Project
             }
             // this point should never be reached
             return (0, 0);
+        }
+        public bool QuickEqualsOrMatch(string input, string[] comparators)
+        {
+            bool comparatorsAvailable = true;
+            for (int i = 0; i < input.Length; i++)
+            {
+                comparatorsAvailable = false;
+                for (int c = 0; c < comparators.Length; c++)
+                {
+                    if (comparators[c].Length == 0) continue;
+                    if (comparators[c].Length != input.Length || input[i] != comparators[c][i])
+                    {
+                        comparators[c] = "";
+                        continue;
+                    }
+                    comparatorsAvailable = true;
+                }
+                if (!comparatorsAvailable)
+                {
+                    break;
+                }
+            }
+            return comparatorsAvailable;
         }
         public int GetAmountOfLines(ref string input)
         {
