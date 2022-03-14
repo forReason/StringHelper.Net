@@ -8,24 +8,30 @@ namespace String_Helper_Project
 {
     public class InvariantString
     {
-        public string InvaryString(string input, bool toLower = false, bool trim = true)
+        public string InvaryString(string input, bool toLower = false, bool trim = true, bool cleanUmlaute = true)
         {
             if (trim) input = input.Trim();
             if (toLower) input = input.ToLower().Trim();
             StringBuilder output = new StringBuilder();
             foreach (char c in input)
             {
+                if (cleanUmlaute)
+                {
+                    switch (c)
+                    {
+                        case 'ä':
+                            output.Append("ae");
+                            break;
+                        case 'ö':
+                            output.Append("oe");
+                            break;
+                        case 'ü':
+                            output.Append("ue");
+                            break;
+                    }
+                }
                 switch (c)
                 {
-                    case 'ä':
-                        output.Append("ae");
-                        break;
-                    case 'ö':
-                        output.Append("oe");
-                        break;
-                    case 'ü':
-                        output.Append("ue");
-                        break;
                     case 'è':
                         output.Append("e");
                         break;
