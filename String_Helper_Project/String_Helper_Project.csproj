@@ -63,6 +63,7 @@
     <Compile Include="InvariantString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextFileFunctions.cs" />
+    <Compile Include="UTF8_Quickdecode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
