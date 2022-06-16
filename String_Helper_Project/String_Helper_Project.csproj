@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NumberFormatting.cs" />
     <Compile Include="StringFunctions.cs" />
     <Compile Include="InvariantString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
