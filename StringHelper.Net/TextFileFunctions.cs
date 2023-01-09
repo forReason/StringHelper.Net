@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 
-namespace String_Helper_Project
+namespace StringHelper.Net
 {
+    /// <summary>
+    /// Class containing methods for reading and converting encoding in text files. 
+    /// Includes a method for reading a specified number of lines from a file and 
+    /// a method for converting a string representation of an encoding to its corresponding System.Text.Encoding object.
+    /// </summary>
     public class TextFileFunctions
     {
         /// <summary>
@@ -44,6 +47,11 @@ namespace String_Helper_Project
             // return the lines
             return lines;
         }
+        /// <summary>
+        /// Converts a string representation of an encoding to its corresponding System.Text.Encoding object.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public Encoding ConvertEncoding(string input)
         {
             Encoding selectedEncoding = Encoding.Default;
