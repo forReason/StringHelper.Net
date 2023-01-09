@@ -4,6 +4,28 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>StringHelper.Net</Title>
+    <Authors>Julian Bechtold, KryptoMine ch</Authors>
+    <Description>a lightweight library with some arbitrary string algorhythms for cleanup, converting, comparing and file interaction</Description>
+    <Copyright>Julian Bechtold</Copyright>
+    <PackageProjectUrl>https://github.com/forReason/StringHelper.Net</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/forReason/StringHelper.Net</RepositoryUrl>
+    <PackageTags>string;invariant;user-input</PackageTags>
+    <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
