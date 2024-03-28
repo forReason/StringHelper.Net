@@ -15,15 +15,15 @@ public class CountCharOccurrences
     private int _lastCheckedOccurrenceCount = -1;
 
     /// <summary>
-    /// counts the occurrences for each char and returns a dictionary for each individual char and the respective count
+    /// counts the occurrences for each char and returns a dictionary with each unique char and the respective count
     /// </summary>
     /// <remarks>
     /// - output can be sorted automatically <br/>
     /// - yields incorrect results if a character occurs more than int.Max times
     /// </remarks>
     /// <param name="input">the string to count the chars for</param>
-    /// <param name="sortOption">specifies in which way the chars are sorted</param>
-    /// <returns>an array which contains each char occurrence with the respective count</returns>
+    /// <param name="sortOption">specifies how the output is sorted</param>
+    /// <returns>a dictionary which contains each unique char with the respective count</returns>
     public Dictionary<char, int> Evaluate(string input, SortOption sortOption)
     {
         // precondition checks
