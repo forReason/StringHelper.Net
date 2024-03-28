@@ -13,7 +13,7 @@ public class CountCharOccurrences
     private readonly object _isEvaluating = new ();
     private short _lastCheckedChar = -1;
     private int _lastCheckedOccurrenceCount = -1;
-    
+
     /// <summary>
     /// counts the occurrences for each char and returns a dictionary for each individual char and the respective count
     /// </summary>
@@ -37,9 +37,10 @@ public class CountCharOccurrences
                 if (!_charOccurrences.TryAdd(c, 1))
                     _charOccurrences[c]++;
             }
-            
+
             // check sorting (after building dict for less occurrences)
-            switch(sortOption) {
+            switch (sortOption)
+            {
                 case SortOption.AlphabeticallyAscending:
                     _lastCheckedChar = -1;
                     foreach (char c in _charOccurrences.Values)
@@ -48,6 +49,7 @@ public class CountCharOccurrences
                             return new Dictionary<char, int>(_charOccurrences.OrderBy(entry => entry.Key));
                         _lastCheckedChar = (short)c;
                     }
+
                     break;
                 case SortOption.AlphabeticallyDescending:
                     _lastCheckedChar = short.MaxValue;
@@ -57,6 +59,7 @@ public class CountCharOccurrences
                             return new Dictionary<char, int>(_charOccurrences.OrderByDescending(entry => entry.Key));
                         _lastCheckedChar = (short)c;
                     }
+
                     break;
                 case SortOption.CharOccurrencesAscending:
                     _lastCheckedOccurrenceCount = -1;
@@ -66,6 +69,7 @@ public class CountCharOccurrences
                             return new Dictionary<char, int>(_charOccurrences.OrderBy(entry => entry.Value));
                         _lastCheckedOccurrenceCount = key;
                     }
+
                     break;
                 case SortOption.CharOccurrencesDescending:
                     _lastCheckedOccurrenceCount = int.MaxValue;
@@ -75,10 +79,12 @@ public class CountCharOccurrences
                             return new Dictionary<char, int>(_charOccurrences.OrderByDescending(entry => entry.Value));
                         _lastCheckedOccurrenceCount = key;
                     }
+
                     break;
                 case SortOption.None:
                     break;
             }
+
             // return a new instance of the sorted dictionary to avoid reference modifications
             return new Dictionary<char, int>(_charOccurrences);
         }
