@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "String_Helper_Project", "String_Helper_Project\String_Helper_Project.csproj", "{367774F4-70F5-44FA-9DD4-B3676F665123}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringHelper.Net", "StringHelper.Net\StringHelper.Net.csproj", "{5E11C41E-8129-4E77-89BD-C33441E32D11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringHelper.Net.XUnitText", "StringHelper.Net.XUnitText\StringHelper.Net.XUnitText.csproj", "{1C6DC5F2-F22E-42FA-8CE7-F6AC788B3FB7}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{367774F4-70F5-44FA-9DD4-B3676F665123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{367774F4-70F5-44FA-9DD4-B3676F665123}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{367774F4-70F5-44FA-9DD4-B3676F665123}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{367774F4-70F5-44FA-9DD4-B3676F665123}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E11C41E-8129-4E77-89BD-C33441E32D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E11C41E-8129-4E77-89BD-C33441E32D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E11C41E-8129-4E77-89BD-C33441E32D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
