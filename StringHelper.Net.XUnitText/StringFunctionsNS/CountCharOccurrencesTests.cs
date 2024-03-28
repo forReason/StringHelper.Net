@@ -89,15 +89,17 @@ public class CountCharOccurrencesTests
     {
         // Arrange
         var stringFunctions = new CountCharOccurrences();
-        string input = "cbacb";
+        string input = "cba2cb1";
 
         // Act
         var result = stringFunctions.Evaluate(input, CountCharOccurrences.SortOption.AlphabeticallyAscending).ToList();
 
         // Assert
-        Assert.Equal('a', result[0].Key);
-        Assert.Equal('b', result[1].Key);
-        Assert.Equal('c', result[2].Key);
+        Assert.Equal('1', result[0].Key);
+        Assert.Equal('2', result[1].Key);
+        Assert.Equal('a', result[2].Key);
+        Assert.Equal('b', result[3].Key);
+        Assert.Equal('c', result[4].Key);
     }
 
     [Fact]
@@ -105,7 +107,7 @@ public class CountCharOccurrencesTests
     {
         // Arrange
         var stringFunctions = new CountCharOccurrences();
-        string input = "cbacb";
+        string input = "1cbac3b";
 
         // Act
         var result = stringFunctions.Evaluate(input, CountCharOccurrences.SortOption.AlphabeticallyDescending).ToList();
@@ -114,6 +116,8 @@ public class CountCharOccurrencesTests
         Assert.Equal('c', result[0].Key);
         Assert.Equal('b', result[1].Key);
         Assert.Equal('a', result[2].Key);
+        Assert.Equal('3', result[3].Key);
+        Assert.Equal('1', result[4].Key);
     }
     [Fact]
     public void CountCharOccurrences_SortedNumericallyAscending_ReturnsSortedDictionary()
@@ -144,5 +148,27 @@ public class CountCharOccurrencesTests
         Assert.Equal('b', result[0].Key);
         Assert.Equal('c', result[1].Key);
         Assert.Equal('a', result[2].Key);
+    }
+    [Fact]
+    public void CountCharOccurrences_RenderString()
+    {
+        // Arrange
+        var stringFunctions = new CountCharOccurrences();
+        string input = "aaabbccccd";
+
+        // Act
+        var result = stringFunctions.Evaluate(input, CountCharOccurrences.SortOption.CharOccurrencesDescending);
+
+        // Assert
+        Assert.Equal("a3b2c4d1", stringFunctions.ToString());
+    }
+    [Fact]
+    public void CountCharOccurrences_RenderEmptyString()
+    {
+        // Arrange
+        var stringFunctions = new CountCharOccurrences();
+
+        // Assert
+        Assert.Equal("", stringFunctions.ToString());
     }
 }

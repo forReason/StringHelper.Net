@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace StringHelper.Net.StringFunctionsNS;
 
 /// <summary>
@@ -13,6 +15,28 @@ public class CountCharOccurrences
     private readonly object _isEvaluating = new ();
     private short _lastCheckedChar = -1;
     private int _lastCheckedOccurrenceCount = -1;
+
+    /// <summary>
+    /// renders the output to String like a3b2c4d1
+    /// </summary>
+    /// <remarks>
+    /// <see cref="Evaluate"/> must be executed first!<br/>
+    /// might yield weird results when numbers are included in the input string
+    /// </remarks>
+    /// <returns>String like a3b2c4d1</returns>
+    public override string ToString()
+    {
+        lock (_isEvaluating)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (KeyValuePair<char, int> keyValue in _charOccurrences){
+                builder.Append(keyValue.Key);
+                builder.Append(keyValue.Value);
+            }
+
+            return builder.ToString();
+        }
+    }
 
     /// <summary>
     /// counts the occurrences for each char and returns a dictionary with each unique char and the respective count
