@@ -13,8 +13,6 @@ public class CountCharOccurrences
 {
     private readonly Dictionary<char, int> _charOccurrences = new();
     private readonly object _isEvaluating = new ();
-    private short _lastCheckedChar = -1;
-    private int _lastCheckedOccurrenceCount = -1;
 
     /// <summary>
     /// renders the output to String like a3b2c4d1
@@ -67,51 +65,18 @@ public class CountCharOccurrences
             switch (sortOption)
             {
                 case SortOption.AlphabeticallyAscending:
-                    _lastCheckedChar = -1;
-                    foreach (char c in _charOccurrences.Values)
-                    {
-                        if (c < _lastCheckedChar)
-                            return new Dictionary<char, int>(_charOccurrences.OrderBy(entry => entry.Key));
-                        _lastCheckedChar = (short)c;
-                    }
-
-                    break;
+                    return new Dictionary<char, int>(_charOccurrences.OrderBy(entry => entry.Key));
                 case SortOption.AlphabeticallyDescending:
-                    _lastCheckedChar = short.MaxValue;
-                    foreach (char c in _charOccurrences.Values)
-                    {
-                        if (c > _lastCheckedChar)
-                            return new Dictionary<char, int>(_charOccurrences.OrderByDescending(entry => entry.Key));
-                        _lastCheckedChar = (short)c;
-                    }
-
-                    break;
+                    return new Dictionary<char, int>(_charOccurrences.OrderByDescending(entry => entry.Key));
                 case SortOption.CharOccurrencesAscending:
-                    _lastCheckedOccurrenceCount = -1;
-                    foreach (int key in _charOccurrences.Values)
-                    {
-                        if (key < _lastCheckedOccurrenceCount)
-                            return new Dictionary<char, int>(_charOccurrences.OrderBy(entry => entry.Value));
-                        _lastCheckedOccurrenceCount = key;
-                    }
-
-                    break;
+                    return new Dictionary<char, int>(_charOccurrences.OrderBy(entry => entry.Value));
                 case SortOption.CharOccurrencesDescending:
-                    _lastCheckedOccurrenceCount = int.MaxValue;
-                    foreach (int key in _charOccurrences.Values)
-                    {
-                        if (key > _lastCheckedOccurrenceCount)
-                            return new Dictionary<char, int>(_charOccurrences.OrderByDescending(entry => entry.Value));
-                        _lastCheckedOccurrenceCount = key;
-                    }
-
-                    break;
+                    return new Dictionary<char, int>(_charOccurrences.OrderByDescending(entry => entry.Value));
                 case SortOption.None:
-                    break;
+                    return new Dictionary<char, int>(_charOccurrences);
+                default:
+                    return new Dictionary<char, int>(_charOccurrences);
             }
-
-            // return a new instance of the sorted dictionary to avoid reference modifications
-            return new Dictionary<char, int>(_charOccurrences);
         }
     }
 
