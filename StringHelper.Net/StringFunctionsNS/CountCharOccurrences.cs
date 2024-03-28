@@ -20,8 +20,9 @@ public class CountCharOccurrences
     /// renders the output to String like a3b2c4d1
     /// </summary>
     /// <remarks>
-    /// <see cref="Evaluate"/> must be executed first!<br/>
-    /// might yield weird results when numbers are included in the input string
+    /// - <see cref="Evaluate"/> must be executed first!<br/>
+    /// - might yield weird results when numbers are included in the input string<br/>
+    /// - The Output is NOT sorted!
     /// </remarks>
     /// <returns>String like a3b2c4d1</returns>
     public override string ToString()
