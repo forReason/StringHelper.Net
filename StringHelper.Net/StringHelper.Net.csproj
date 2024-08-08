@@ -16,8 +16,14 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.1.0</Version>
-    <PackageReleaseNotes>1.1.0
+    <Version>1.2.3</Version>
+    <PackageReleaseNotes>1.2.3
+- added function to find a json in text
+
+1.2.1
+- expanded the invary string function with optional white space replacement and optional deduplication of characters
+
+1.1.0
 - implement character occurrence counting
 - add .net 8 targeting
 

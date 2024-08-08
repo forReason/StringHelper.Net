@@ -16,17 +16,31 @@ namespace StringHelper.Net
         /// <param name="toLower">Should all characters be TrANsLaTEd to lowercase?</param>
         /// <param name="trim">trim empty spaces at start and end </param>
         /// <param name="cleanUmlaute">Clean special characters such as äöü é î</param>
+        /// <param name="replaceWhitespace">when set, replaces any whitespaces with that char</param>
+        /// <param name="deduplicateChars">when set, removes multiple occurrences of any of the contained chars, eg. ---, or oooo</param>
         /// <returns></returns>
-        public static string InvaryString(string input, bool toLower = false, bool trim = true, bool cleanUmlaute = true)
+        public static string InvaryString(
+            string input, bool toLower = false, bool trim = true, 
+            bool cleanUmlaute = true, char? replaceWhitespace = null, HashSet<char>? deduplicateChars = null)
         {
             if (trim) input = input.Trim();
             StringBuilder output = new StringBuilder();
+            char lastChar = char.MaxValue;
             for (int i = 0; i < input.Length; i++)
             {
                 char c = input[i];
                 if (toLower)
                 {
                     c = char.ToLower(c);
+                }
+                if (replaceWhitespace is not null && char.IsWhiteSpace(c)) 
+                {
+                    c = replaceWhitespace.Value;
+                }
+                if (deduplicateChars is not null )
+                {
+                    if (c == lastChar && deduplicateChars.Contains(c)) continue;
+                    lastChar = c;
                 }
                 if (cleanUmlaute)
                 {

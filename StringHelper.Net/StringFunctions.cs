@@ -1,4 +1,7 @@
 ﻿
+using System.Text.Json;
+using System.Text.RegularExpressions;
+
 namespace StringHelper.Net
 {
     /// <summary>
@@ -84,6 +87,32 @@ namespace StringHelper.Net
                 lastChar = c;
             }
             return lines;
+        }
+        /// <summary>
+        /// finds and returns the first json element within a text
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public JsonElement? FindJsonInText(ref string input)
+        {
+            // Regular expression pattern to match JSON objects
+            var jsonPattern = new Regex(@"\{.*?\}", RegexOptions.Singleline);
+            var matches = jsonPattern.Matches(input);
+
+            foreach (Match match in matches)
+            {
+                try
+                {
+                    // Try to parse the found string as JSON
+                    var jsonData = JsonDocument.Parse(match.Value).RootElement;
+                    return jsonData;
+                }
+                catch (JsonException)
+                {
+                    continue;
+                }
+            }
+            return null;
         }
     }
 }
