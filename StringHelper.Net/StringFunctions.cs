@@ -93,7 +93,7 @@ namespace StringHelper.Net
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public JsonElement? FindJsonInText(ref string input)
+        public string? FindJsonInText(ref string input)
         {
             // Regular expression pattern to match JSON objects
             var jsonPattern = new Regex(@"\{.*?\}", RegexOptions.Singleline);
@@ -103,9 +103,7 @@ namespace StringHelper.Net
             {
                 try
                 {
-                    // Try to parse the found string as JSON
-                    var jsonData = JsonDocument.Parse(match.Value).RootElement;
-                    return jsonData;
+                    return match.Value;
                 }
                 catch (JsonException)
                 {
