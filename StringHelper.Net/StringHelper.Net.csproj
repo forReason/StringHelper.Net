@@ -16,8 +16,11 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.2.4</Version>
-    <PackageReleaseNotes>1.2.3
+    <Version>1.2.5</Version>
+    <PackageReleaseNotes>1.2.5
+- add unit tests for json finder, fix json finder function
+
+1.2.3
 - added function to find a json in text
 
 1.2.1

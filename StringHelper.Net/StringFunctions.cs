@@ -95,22 +95,26 @@ namespace StringHelper.Net
         /// <returns></returns>
         public string? FindJsonInText(ref string input)
         {
-            // Regular expression pattern to match JSON objects
-            var jsonPattern = new Regex(@"\{.*?\}", RegexOptions.Singleline);
+            // Regular expression pattern to match JSON objects, allowing for nested structures
+            var jsonPattern = new Regex(@"\{(?:[^{}]|(?<open>\{)|(?<-open>\}))+(?(open)(?!))\}", RegexOptions.Singleline);
             var matches = jsonPattern.Matches(input);
 
             foreach (Match match in matches)
             {
                 try
                 {
-                    return match.Value;
+                    // Attempt to parse to ensure it's valid JSON
+                    var jsonObject = JsonSerializer.Deserialize<JsonElement>(match.Value);
+                    return match.Value; // If parsing is successful, return the JSON string
                 }
                 catch (JsonException)
                 {
-                    continue;
+                    continue; // If parsing fails, continue to the next match
                 }
             }
-            return null;
+
+            return null; // Return null if no valid JSON was found
         }
+
     }
 }
