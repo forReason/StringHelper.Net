@@ -1,4 +1,5 @@
 ﻿
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -95,20 +96,27 @@ namespace StringHelper.Net
         /// <returns></returns>
         public string? FindJsonInText(ref string input)
         {
-            // Regular expression pattern to match JSON objects, allowing for nested structures
+            // Regex pattern to match JSON objects, allowing for nested structures
             var jsonPattern = new Regex(@"\{(?:[^{}]|(?<open>\{)|(?<-open>\}))+(?(open)(?!))\}", RegexOptions.Singleline);
             var matches = jsonPattern.Matches(input);
 
             foreach (Match match in matches)
             {
+                string jsonCandidate = match.Value;
+
+                // Fix formatting issues in JSON string
+                jsonCandidate = FixJsonFormatting(jsonCandidate);
+
                 try
                 {
                     // Attempt to parse to ensure it's valid JSON
-                    var jsonObject = JsonSerializer.Deserialize<JsonElement>(match.Value);
-                    return match.Value; // If parsing is successful, return the JSON string
+                    var jsonObject = JsonSerializer.Deserialize<JsonElement>(jsonCandidate);
+                    return jsonCandidate; // If parsing is successful, return the JSON string
                 }
-                catch (JsonException)
+                catch (JsonException ex)
                 {
+                    Debug.WriteLine($"Invalid JSON: {jsonCandidate}");
+                    Debugger.Break();
                     continue; // If parsing fails, continue to the next match
                 }
             }
@@ -116,5 +124,16 @@ namespace StringHelper.Net
             return null; // Return null if no valid JSON was found
         }
 
+        private string FixJsonFormatting(string json)
+        {
+            // Correct JSON formatting issues by handling double backslashes
+            // Replace double backslashes followed by `n`, `r`, `t` with single escape sequences
+            json = Regex.Replace(json, @"\\(\\n|\\r|\\t)", @"\1");
+
+            // Correct any cases where single backslashes are used incorrectly
+            json = Regex.Replace(json, @"(?<!\\)\\([nrt])", @"\\\1");
+
+            return json;
+        }
     }
 }
