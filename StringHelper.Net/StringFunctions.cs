@@ -122,7 +122,7 @@ namespace StringHelper.Net
 
             if (exceptions.Count > 0)
             {
-                throw new AggregateException("No valid JSON found. Multiple exceptions occurred.", exceptions);
+                throw exceptions[0];
             }
 
             return null; // Return null if no valid JSON was found
