@@ -93,12 +93,13 @@ namespace StringHelper.Net
         /// finds and returns the first json element within a text
         /// </summary>
         /// <param name="text"></param>
-        /// <returns></returns>
+        /// <exception cref="JsonException">the json is likely malformed</exception>
+        /// <returns>the json string</returns>
         public string? FindJsonInText(ref string input)
         {
-            // Regex pattern to match JSON objects, allowing for nested structures
             var jsonPattern = new Regex(@"\{(?:[^{}]|(?<open>\{)|(?<-open>\}))+(?(open)(?!))\}", RegexOptions.Singleline);
             var matches = jsonPattern.Matches(input);
+            var exceptions = new List<JsonException>();
 
             foreach (Match match in matches)
             {
@@ -106,7 +107,6 @@ namespace StringHelper.Net
 
                 // Fix formatting issues in JSON string
                 jsonCandidate = FixJsonFormatting(jsonCandidate);
-
                 try
                 {
                     // Attempt to parse to ensure it's valid JSON
@@ -115,14 +115,19 @@ namespace StringHelper.Net
                 }
                 catch (JsonException ex)
                 {
-                    Debug.WriteLine($"Invalid JSON: {jsonCandidate}");
-                    Debugger.Break();
+                    exceptions.Add(ex);
                     continue; // If parsing fails, continue to the next match
                 }
             }
 
+            if (exceptions.Count > 0)
+            {
+                throw new AggregateException("No valid JSON found. Multiple exceptions occurred.", exceptions);
+            }
+
             return null; // Return null if no valid JSON was found
         }
+
 
         private string FixJsonFormatting(string json)
         {
