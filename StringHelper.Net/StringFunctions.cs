@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
+using System.Text.RegularExpressions;
+
 namespace StringHelper.Net
 {
     /// <summary>
@@ -139,6 +141,29 @@ namespace StringHelper.Net
             json = Regex.Replace(json, @"(?<!\\)\\([nrt])", @"\\\1");
 
             return json;
+        }
+        
+        /// <summary>
+        /// this function extracts a DateTime object from string.
+        /// </summary>
+        /// <param name="input">the string which to scan for the dateTime</param>
+        /// <param name="pattern">the regex pattern to match. Defaults to american format MM/DD/YYYY</param>
+        /// <returns></returns>
+        public static DateTime? ExtractDate(string input, string pattern = @"\d{2}/\d{2}/\d{4}")
+        {
+            // Regular expression pattern to capture date in MM/DD/YYYY format
+            var datePattern = pattern;
+        
+            // Search for the date pattern in the input string
+            var match = Regex.Match(input, datePattern);
+        
+            // If a match is found, try to parse the date
+            if (match.Success && DateTime.TryParse(match.Value, out DateTime releaseDate))
+            {
+                return releaseDate;
+            }
+
+            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace StringHelper.Net
 {
@@ -105,6 +106,31 @@ namespace StringHelper.Net
             foreach (char c in input)
             {
                 if (!charsToClean.Contains(c)) output.Append(c);
+            }
+            return output.ToString();
+        }
+
+        public static string Tagize(string input)
+        {
+            StringBuilder output = new StringBuilder();
+            char lastChar = char.MaxValue;
+            foreach (char c in input)
+            {
+                char cleanedChar = char.ToLowerInvariant(c);
+                if (char.IsLetterOrDigit(cleanedChar))
+                {
+                    output.Append(cleanedChar);
+                    lastChar = cleanedChar;
+                }
+                else if (char.IsWhiteSpace(cleanedChar)
+                         || cleanedChar == '-'
+                         || cleanedChar == '_')
+                {
+                    char nextChar = '-';
+                    if (lastChar == nextChar) continue;
+                    output.Append(cleanedChar);
+                    lastChar = nextChar;
+                }
             }
             return output.ToString();
         }
