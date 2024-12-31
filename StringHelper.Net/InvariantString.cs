@@ -117,19 +117,19 @@ namespace StringHelper.Net
             foreach (char c in input)
             {
                 char cleanedChar = char.ToLowerInvariant(c);
-                if (char.IsLetterOrDigit(cleanedChar))
-                {
-                    output.Append(cleanedChar);
-                    lastChar = cleanedChar;
-                }
-                else if (char.IsWhiteSpace(cleanedChar)
-                         || cleanedChar == '-'
-                         || cleanedChar == '_')
+                if (char.IsWhiteSpace(cleanedChar)
+                    || cleanedChar == '-'
+                    || cleanedChar == '_')
                 {
                     char nextChar = '-';
                     if (lastChar == nextChar) continue;
-                    output.Append(cleanedChar);
+                    output.Append(nextChar);
                     lastChar = nextChar;
+                }
+                else if (char.IsLetterOrDigit(cleanedChar))
+                {
+                    output.Append(cleanedChar);
+                    lastChar = cleanedChar;
                 }
             }
             return output.ToString();
