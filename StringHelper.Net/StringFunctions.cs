@@ -1,5 +1,6 @@
 ﻿
 using System.Diagnostics;
+using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -164,6 +165,35 @@ namespace StringHelper.Net
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// extracts the words (letters only) from a string and returns an array of these words
+        /// </summary>
+        /// <param name="input">the string to chunk</param>
+        /// <param name="toUppperInvariant">for better comparison options</param>
+        /// <returns>array of words (letters only)</returns>
+        public static string[] ChunkStringToWords(string input, bool toUppperInvariant = true)
+        {
+            List<string> words = new List<string>();
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in input.AsSpan())
+            {
+                if (sb.Length > 0 && char.IsWhiteSpace(c) || char.IsPunctuation(c) || char.IsSeparator(c))
+                {
+                    words.Add(sb.ToString());
+                    sb.Clear();
+                    continue;
+                }
+                if (char.IsLetter(c)) sb.Append(char.ToUpperInvariant(c));
+            }
+            if (sb.Length > 0)
+            {
+                words.Add(sb.ToString());
+                sb.Clear();
+            }
+
+            return words.ToArray();
         }
     }
 }

@@ -16,8 +16,11 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.3.2</Version>
-    <PackageReleaseNotes>1.3.0
+    <Version>1.3.3</Version>
+    <PackageReleaseNotes>1.3.3
+- Add chunk string function
+
+1.3.0
 Added taggize function
 
 1.2.7
@@ -60,6 +63,10 @@ target .net 6 &amp; 7</PackageReleaseNotes>
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Objects\" />
   </ItemGroup>
 
 </Project>
