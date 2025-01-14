@@ -6,6 +6,20 @@ namespace StringHelper.Net.XUnitText;
 public class WordFilterStreamTests
 {
     [Fact]
+    public void Match_GeneratewordFilter()
+    {
+        // Arrange
+        WordFilter test = new WordFilter(["foo", "bar"]);
+        WordFilterStream stream = new WordFilterStream(test);
+        WordFilterStream stream2 = test.GetFilterStream();
+
+        // Act
+        bool match = stream.Process("This is a hello world example.", MatchType.Contains);
+
+        // Assert
+        Assert.True(match);
+    }
+    [Fact]
     public void Match_ReturnsTrue_WhenSingleChunkMatchesFilter()
     {
         // Arrange
