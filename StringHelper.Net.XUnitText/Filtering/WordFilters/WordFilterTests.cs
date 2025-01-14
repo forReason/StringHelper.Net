@@ -1,3 +1,6 @@
+using StringHelper.Net.Filtering.WordFilters;
+using MatchType = StringHelper.Net.Filtering.WordFilters.MatchType;
+
 namespace StringHelper.Net.XUnitText;
 
 public class StringFunnelTests
@@ -7,7 +10,7 @@ public class StringFunnelTests
     {
         // Arrange
         string[] filters = { "hello", "world" };
-        StringFunnel funnel = new StringFunnel(filters);
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
         bool match = funnel.Match("hello");
@@ -20,8 +23,8 @@ public class StringFunnelTests
     public void Match_ReturnsTrue_ForContainsMatch()
     {
         // Arrange
-        string[] filters = { "hello", "world" };
-        StringFunnel funnel = new StringFunnel(filters);
+        string[] filters = { "hello world" };
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
         bool match = funnel.Match("This is a hello world example.");
@@ -29,13 +32,26 @@ public class StringFunnelTests
         // Assert
         Assert.True(match);
     }
+    [Fact]
+    public void Match_ReturnsFalse_ForNotMatch()
+    {
+        // Arrange
+        string[] filters = { "hello world" };
+        WordFilter funnel = new WordFilter(filters);
+
+        // Act
+        bool match = funnel.Match("This is a hello in world example.");
+
+        // Assert
+        Assert.False(match);
+    }
 
     [Fact]
     public void Match_ReturnsFalse_WhenNoMatchFound()
     {
         // Arrange
         string[] filters = { "hello", "world" };
-        StringFunnel funnel = new StringFunnel(filters);
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
         bool match = funnel.Match("This string does not match any filters.");
@@ -48,11 +64,11 @@ public class StringFunnelTests
     public void Match_ReturnsTrue_ForBeginsWithMatch()
     {
         // Arrange
-        string[] filters = { "begin", "start" };
-        StringFunnel funnel = new StringFunnel(filters);
+        string[] filters = { "begin here" };
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
-        bool match = funnel.Match("Begin here to test.", StringFunnel.MatchType.BeginsWith);
+        bool match = funnel.Match("Begin here to test.", MatchType.BeginsWith);
 
         // Assert
         Assert.True(match);
@@ -63,10 +79,10 @@ public class StringFunnelTests
     {
         // Arrange
         string[] filters = { "begin", "start" };
-        StringFunnel funnel = new StringFunnel(filters);
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
-        bool match = funnel.Match("This does not begin with a filter.", StringFunnel.MatchType.BeginsWith);
+        bool match = funnel.Match("This does not begin with a filter.", MatchType.BeginsWith);
 
         // Assert
         Assert.False(match);
@@ -75,15 +91,15 @@ public class StringFunnelTests
     [Fact]
     public void AddFilter_AllowsDynamicFilterAddition()
     {
-        // Arrange
+        // false filter
         string[] filters = { "dynamic" };
-        StringFunnel funnel = new StringFunnel(filters);
-        funnel.AddFilter("additional");
-
-        // Act
+        WordFilter funnel = new WordFilter(filters);
         bool match = funnel.Match("This has an additional filter.");
+        Assert.False(match);
 
-        // Assert
+        // additional filter
+        funnel.AddFilter("additional");
+        match = funnel.Match("This has an additional filter.");
         Assert.True(match);
     }
 
@@ -91,8 +107,8 @@ public class StringFunnelTests
     public void Match_HandlesComplexInputsWithDelimiters()
     {
         // Arrange
-        string[] filters = { "hello", "world" };
-        StringFunnel funnel = new StringFunnel(filters);
+        string[] filters = { "hello world" };
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
         bool match = funnel.Match("Hello, world!");
@@ -105,8 +121,8 @@ public class StringFunnelTests
     public void Match_HandlesCaseInsensitiveMatching()
     {
         // Arrange
-        string[] filters = { "case", "insensitive" };
-        StringFunnel funnel = new StringFunnel(filters);
+        string[] filters = { "case insensitive" };
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
         bool match = funnel.Match("This is CASE insensitive.");
@@ -120,7 +136,7 @@ public class StringFunnelTests
     {
         // Arrange
         string[] filters = { "test" };
-        StringFunnel funnel = new StringFunnel(filters);
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
         bool match = funnel.Match("");
@@ -134,7 +150,7 @@ public class StringFunnelTests
     {
         // Arrange
         string[] filters = { };
-        StringFunnel funnel = new StringFunnel(filters);
+        WordFilter funnel = new WordFilter(filters);
 
         // Act
         bool match = funnel.Match("This input won't match.");
