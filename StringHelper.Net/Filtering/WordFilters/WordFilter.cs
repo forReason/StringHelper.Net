@@ -138,7 +138,7 @@ public class WordFilter
     /// </summary>
     /// <param name="c"></param>
     /// <returns></returns>
-    internal static bool IsDelimiter(char c) =>
+    public static bool IsDelimiter(char c) =>
         c != '’' && c != '\'' && // exclude special cases (can't)
         (
             char.IsWhiteSpace(c)

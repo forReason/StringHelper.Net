@@ -18,6 +18,19 @@ public class StringFunnelTests
         // Assert
         Assert.True(match);
     }
+    [Fact]
+    public void TestDelimiter()
+    {
+
+        char c = '’';
+            bool delim =  c != '’' && c != '\'' && (
+                char.IsWhiteSpace(c)
+                || char.IsPunctuation(c)
+                || char.IsSeparator(c)
+            );
+            bool isdelimiter = WordFilter.IsDelimiter('’');
+        Assert.False(isdelimiter);
+    }
 
     [Fact]
     public void Match_ReturnsTrue_ForContainsMatch()

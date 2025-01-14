@@ -80,12 +80,12 @@ public class WordFilterStream
             if (char.IsLetter(c)) _Buffer.Append(char.ToUpperInvariant(c));
         }
 
-        // Process remaining buffer at the end
-        if (_Buffer.Length > 0)
-        {
-            string word = _Buffer.ToString();
-            if (_Funnel.ProcessWord(word, _CurrentNodes, matchType)) return true;
-        }
+        //// Process remaining buffer at the end
+        //if (_Buffer.Length > 0)
+        //{
+        //    string word = _Buffer.ToString();
+        //    if (_Funnel.ProcessWord(word, _CurrentNodes, matchType)) return true;
+        //}
 
         return false;
     }

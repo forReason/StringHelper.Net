@@ -20,6 +20,18 @@ public class WordFilterStreamTests
         Assert.True(match);
     }
     [Fact]
+    public void Match_Procedural()
+    {
+        // Arrange
+        WordFilter test = new WordFilter(["I cant"]);
+        WordFilterStream stream = new WordFilterStream(test);
+
+        // Assert
+        Assert.False(stream.Process("I", MatchType.BeginsWith));
+        Assert.False(stream.Process(" can", MatchType.BeginsWith));
+        Assert.True(stream.Process("’t ", MatchType.BeginsWith));
+    }
+    [Fact]
     public void Match_ReturnsTrue_WhenSingleChunkMatchesFilter()
     {
         // Arrange
