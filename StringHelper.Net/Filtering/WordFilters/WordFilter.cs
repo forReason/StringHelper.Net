@@ -172,4 +172,13 @@ public class WordFilter
 
         return words.ToArray();
     }
+
+    /// <summary>
+    /// returns a new filter stream
+    /// </summary>
+    /// <returns></returns>
+    public WordFilterStream GetFilterStream()
+    {
+        return new WordFilterStream(this);
+    }
 }

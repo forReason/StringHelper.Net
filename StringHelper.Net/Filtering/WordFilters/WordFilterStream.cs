@@ -35,6 +35,18 @@ public class WordFilterStream
         _Funnel = new WordFilter(inputFilters);
         Clear(); // Initialize the state
     }
+    /// <summary>
+    /// creates a new word-filter with the given input filter.
+    /// </summary>
+    /// <remarks>
+    /// Filters need to be loaded, which is happening multithreaded
+    /// </remarks>
+    /// <param name="baseFilter">the base filter</param>
+    public WordFilterStream(WordFilter baseFilter)
+    {
+        _Funnel = baseFilter;
+        Clear(); // Initialize the state
+    }
 
     /// <summary>
     /// adds a new, additional filter. This can be done while matching, but won't necessarily match on the current iteration
