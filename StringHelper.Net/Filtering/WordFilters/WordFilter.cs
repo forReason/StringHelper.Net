@@ -139,9 +139,12 @@ public class WordFilter
     /// <param name="c"></param>
     /// <returns></returns>
     internal static bool IsDelimiter(char c) =>
-        char.IsWhiteSpace(c) // spaces
-        || (char.IsPunctuation(c) && c != '\'') // punctuation chars, except apostrophe (can't)
-        || char.IsSeparator(c); // separators (||)
+        c != '’' && c != '\'' && // exclude special cases (can't)
+        (
+            char.IsWhiteSpace(c)
+            || char.IsPunctuation(c)
+            || char.IsSeparator(c)
+        );
 
     /// <summary>
     /// internal function to separate each word (e.g. I will go ["I", "will", "go"]
