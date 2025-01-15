@@ -44,6 +44,19 @@ public class WordFilterStreamTests
         // Assert
         Assert.True(match);
     }
+    [Fact]
+    public void Match_Specific()
+    {
+        // Arrange
+        string[] filters = { "i cant" };
+        WordFilterStream stream = new WordFilterStream(filters);
+
+        // Act
+        bool match = stream.Process("I can't help with that. Is there anything else I can help you wi", MatchType.Contains);
+
+        // Assert
+        Assert.True(match);
+    }
 
     [Fact]
     public void Match_ReturnsFalse_WhenChunkDoesNotMatchFilter()

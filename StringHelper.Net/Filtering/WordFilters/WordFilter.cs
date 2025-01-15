@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text;
 
 namespace StringHelper.Net.Filtering.WordFilters;
@@ -113,7 +114,8 @@ public class WordFilter
             if (currentNode.Children.ContainsKey(word))
             {
                 currentNode = currentNode.Children[word];
-                if (currentNode.IsFinal) return true;
+                if (currentNode.IsFinal)
+                    return true;
                 currentNodes.Add(currentNode);
             }
 
