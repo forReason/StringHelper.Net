@@ -110,6 +110,11 @@ namespace StringHelper.Net
             return output.ToString();
         }
 
+        /// <summary>
+        /// cleans a short string into a tag (replacing spaces and normalizing)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string Tagize(string input)
         {
             StringBuilder output = new StringBuilder();
