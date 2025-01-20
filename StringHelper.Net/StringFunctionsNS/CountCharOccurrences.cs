@@ -6,7 +6,7 @@ namespace StringHelper.Net.StringFunctionsNS;
 /// the purpose of this class is to count the occurrences of each character within a string.
 /// </summary>
 /// <remarks>
-/// please note that this class is thread safe.
+/// This class is thread safe.
 /// However, due to the locking nature, it is highly recommended to create one instance per worker thread
 /// </remarks>
 public class CountCharOccurrences
