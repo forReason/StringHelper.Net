@@ -16,8 +16,11 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.4.8</Version>
-    <PackageReleaseNotes>1.4.8
+    <Version>1.4.9</Version>
+    <PackageReleaseNotes>1.4.9
+add variance counter
+
+1.4.8
 - several updates and fixes to wordfilter
 
 1.4.0
