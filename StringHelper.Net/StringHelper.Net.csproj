@@ -77,4 +77,8 @@ target .net 6 &amp; 7</PackageReleaseNotes>
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FlowEncrypt" Version="1.1.0" />
+  </ItemGroup>
+
 </Project>
