@@ -15,10 +15,10 @@ public class CalculateNGramRepetitionScore
     /// <param name="text">the text to analyze</param>
     /// <param name="n">the number of words to group to an n-gram</param>
     /// <returns></returns>
-    public static double ComputeNGramRepetitionScore(string text, int n = 5)
+    public static (double Score, List<(string Phrase, int Count)> RepeatingPhrases) ComputeNGramRepetitionScore(string text, int n = 5)
     {
         if (string.IsNullOrWhiteSpace(text))
-            return 0;
+            return (0, new List<(string, int)>());
 
         // Tokenize text into words
         List<string> words = Tokenize(text);
@@ -31,10 +31,20 @@ public class CalculateNGramRepetitionScore
             .ToDictionary(g => g.Key, g => g.Count());
 
         int totalNGrams = nGrams.Count;
-        int repeatedNGrams = nGramCounts.Values.Where(count => count > 1).Sum();
+        int repeatedNGrams = nGramCounts.Values.Where(count => count > 2).Sum();
 
-        return totalNGrams > 0 ? (double)repeatedNGrams / totalNGrams : 0;
+        // Extract and sort the repeating n-grams by descending count
+        var repeatingPhrases = nGramCounts
+            .Where(kvp => kvp.Value > 1)
+            .OrderByDescending(kvp => kvp.Value)
+            .Select(kvp => (kvp.Key, kvp.Value))
+            .ToList();
+
+        double score = totalNGrams > 0 ? (double)repeatedNGrams / totalNGrams : 0;
+        return (score, repeatingPhrases);
     }
+
+
 
     private static List<string> Tokenize(string text)
     {
