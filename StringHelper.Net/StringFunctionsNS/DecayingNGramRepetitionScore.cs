@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -16,18 +17,18 @@ public class DecayingNGramRepetitionScore
     /// <param name="text">the text to analyze</param>
     /// <param name="n">the number of words to group to an n-gram</param>
     /// <returns></returns>
-    public static Dictionary<string, double> ComputeDecayingNGramRepetitionScore(string text, int n = 5, double recentRepetitionTreshold = 3.5, bool onlyReturnFlagged = false)
+    public static KeyValuePair<string, double>[] ComputeDecayingNGramRepetitionScore(string text, int n = 5, double recentRepetitionTreshold = 2, bool onlyReturnFlagged = false)
     {
         if (string.IsNullOrWhiteSpace(text))
-            return new Dictionary<string, double>();
+            return new KeyValuePair<string, double>[] {};
         
         List<string> words = Tokenize(text);
         List<string> nGrams = GenerateNGrams(words, n);
         
         int referenceWindow = 1000;
-        double baseRate1WordNgramPer1000 = 60;
-        double actualBaseRatePer1000 = baseRate1WordNgramPer1000 / (Math.Pow(2, n-1));
-        double decayPerNgram = actualBaseRatePer1000 / (referenceWindow/n);
+        double baseRate1WordNgramPer1000 = 50;
+        double actualBaseRatePer1000 = baseRate1WordNgramPer1000 / (Math.Pow(2.5, n));
+        double decayPerNgram = actualBaseRatePer1000 / (referenceWindow);
 
         // This dictionary tracks: (lastOccurrence, currentScore)
         Dictionary<string, (int LastOccurrence, double CurrentScore)> phrases 
@@ -63,21 +64,28 @@ public class DecayingNGramRepetitionScore
         // Final pass: decay from last occurrence to the "end" (wordIndex)
         foreach (var key in phrases.Keys.ToList())
         {
-            var (lastPos, score) = phrases[key];
-            int delta = wordIndex - lastPos;
-
+            var (lastPos, oldScore) = phrases[key];
+            int delta = wordIndex - lastPos; // how long since last occurrence
             double finalDecay = Math.Exp(-decayPerNgram * delta);
-            double finalScore = score * finalDecay;
-
+            double finalScore = oldScore * finalDecay;
             phrases[key] = (lastPos, finalScore);
         }
-
+        
         // Build final dictionary of { nGram -> finalDecayedScore }
         var allScores = phrases.ToDictionary(
             p => p.Key, p => p.Value.CurrentScore);
 
         if (!onlyReturnFlagged)
-            return allScores;
+        {
+            // If you want a sorted result (descending by score), you can use LINQ OrderByDescending:
+            var allScoresSorted = allScores
+                .OrderByDescending(kvp => kvp.Value)
+                .ToArray();
+
+            // Return the sorted dictionary (though keep in mind that once it's a Dictionary,
+            // you lose ordering again, so a list might be more appropriate if you strictly need “sorted”).
+            return allScoresSorted;
+        }
 
         // return flagged only if requested
         var flagged = new Dictionary<string, double>();
@@ -88,8 +96,12 @@ public class DecayingNGramRepetitionScore
                 flagged[kvp.Key] = kvp.Value;
             }
         }
+        
+        var flaggedSorted = flagged
+            .OrderByDescending(kvp => kvp.Value)
+            .ToArray();
 
-        return flagged;
+        return flaggedSorted;
     }
 
 
