@@ -7,15 +7,13 @@ namespace StringHelper.Net.StringFunctionsNS;
 public class DecayingNGramRepetitionScore
 {
     /// <summary>
-    /// returns a score between 0.0 (no repetition) to 1.0 (only repetitions)<br/>
+    /// returns a score between 0.0 (no repetition) to infinity (only repetitions)<br/>
     /// eg:<br/>
     /// - No repetition at all: 0.0<br/>
-    /// - Some repetition: 0.3<br/>
-    /// - Lots of repeated content: 0.75<br/>
-    /// - Fully identical content: 1.0
+    /// - Some repetition: >1<br/>
+    /// - Lots of repeated content: 2<br/>
     /// </summary>
-    /// <param name="text">the text to analyze</param>
-    /// <param name="n">the number of words to group to an n-gram</param>
+    /// <param name="tokenChunk">the text to analyze</param>
     /// <returns></returns>
     public static KeyValuePair<string, double>[] ComputeDecayingNGramRepetitionScore(string text, int n = 5, double recentRepetitionTreshold = 2, bool onlyReturnFlagged = false)
     {
