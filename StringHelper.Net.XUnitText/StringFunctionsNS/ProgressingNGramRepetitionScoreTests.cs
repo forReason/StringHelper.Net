@@ -79,44 +79,93 @@ public class ProgressingNGramRepetitionScoreTests
         Assert.NotEmpty(flagged);
     }
     [Fact]
-    public void ShortNGram_ScoringWorks()
+    public void LongNGram_ScoringWorks()
     {
         var scorer = new ProgressingNGramRepetitionScore(ngramLength: 4);
         List<string> tokens = new List<string>()
-{
-    "#", " ", "Eins", "atz", "\n", "\n", "* ", "  Fernw", "artung", ", ", "direkte", " Verb", "indung", " zum",
-    " Service", "-", "Experten", ":", " Störun", "gen", " direkt", " lös", "en ", "bzw.", " Verkü", "rzung", " der",
-    " Dauer", " zur", " Behebung", "\n", "*", "  ", " Monit", "oring ", "/", " Dash", "board", ":", " Sämt", "liche",
-    " Anlagen", " auf", " einen", " Blick", "\n", "*  ", " Möglich", "keit ", "Na", "chrichten ", "zu", " versenden",
-    " beim", " Erreic", "hen ", "vo", "n Grenz", "werten", "\n", "*  ", " Mit ", "LT", "E ", "oder ", "Kundenn", "etzwerk",
-    " möglich", "\n", "*", "   Kein", " Zugriff ", "ohne", " Einwi", "lligung", " des", " Anwenders", "\n", "\n",
-    "[", "Image", " of", " two", " people", " in", " lab", " coats", " and", " hair", "nets", " working", " at", " a",
-    " laboratory", " bench", "]", "\n", "\n", "#", " SKAN", " connect", "\n", "\n",
-    "*   Fernw", "artung", ", ", "direkte", " Verb", "indung", " zum", " Service", "-", "Experten", ":",
-    " Störun", "gen", " direkt", " lös", "en ", "bzw.", " Verkü", "rzung", " der", " Dauer", " zur", " Behebung", "\n",
-    "*   Monit", "oring ", "/", " Dash", "board", ":", " Sämt", "liche", " Anlagen", " auf", " einen", " Blick", "\n",
-    "*   Möglich", "keit ", "Na", "chrichten ", "zu", " versenden", " beim", " Erreic", "hen ", "vo", "n Grenz", "werten", "\n",
-    "*   Mit ", "LT", "E ", "oder ", "Kundenn", "etzwerk", " möglich", "\n",
-    "*   Kein", " Zugriff ", "ohne", " Einwi", "lligung", " des", " Anwenders", "\n", "\n",
-    "[", "Image", " of", " a", " person", " in", " a", " lab", " coat", " and", " hair", "net", " working", " at", " a",
-    " laboratory", " bench", "]", "\n", "\n", "#", " SKAN", " connect", "\n", "\n",
-    "*   Fernw", "artung", ", ", "direkte", " Verb", "indung", " zum", " Service", "-", "Experten", ":",
-    " Störun", "gen", " direkt", " lös", "en ", "bzw.", " Verkü", "rzung", " der", " Dauer", " zur", " Behebung", "\n",
-    "*   Monit", "oring ", "/", " Dash", "board", ":", " Sämt", "liche", " Anlagen", " auf", " einen", " Blick", "\n",
-    "*   Möglich", "keit ", "Na", "chrichten ", "zu", " versenden", " beim", " Erreic", "hen ", "vo", "n Grenz", "werten", "\n",
-    "*   Mit ", "LT", "E ", "oder ", "Kundenn", "etzwerk", " möglich", "\n",
-    "*   Kein", " Zugriff ", "ohne", " Einwi", "lligung", " des", " Anwenders", "\n", "\n",
-    "[", "Image", " of", " a", " person", " in", " a", " lab", " coat", " and", " hair", "net", " working", " at", " a",
-    " laboratory", " bench", "]", "\n", "\n", "#", " SKAN", " connect", "\n", "\n",
-    "*   Fernw", "artung", ", ", "direkte", " Verb", "indung", " zum", " Service", "-", "Experten", ":",
-    " Störun", "gen", " direkt", " lös", "en ", "bzw.", " Verkü", "rzung", " der", " Dauer", " zur", " Behebung", "\n",
-    "*   Monit", "oring ", "/", " Dash", "board", ":", " Sämt", "liche", " Anlagen", " auf", " einen", " Blick", "\n",
-    "*   Möglich", "keit ", "Na", "chrichten ", "zu", " versenden", " beim", " Erreic", "hen ", "vo", "n Grenz", "werten", "\n",
-    "*   Mit ", "LT", "E ", "oder ", "Kundenn", "etzwerk", " möglich", "\n",
-    "*   Kein", " Zugriff ", "ohne", " Einwi", "lligung", " des", " Anwenders", "\n", "\n",
-    "[", "Image", " of", " a", " person", " in", " a", " lab", " coat", " and", " hair", "net", " working", " at", " a",
-    " laboratory", " bench", "]"
-};
+        {
+            "#", " ", "Eins", "atz", "\n", "\n", "* ", "  Fernw", "artung", ", ", "direkte", " Verb", "indung", " zum",
+            " Service", "-", "Experten", ":", " Störun", "gen", " direkt", " lös", "en ", "bzw.", " Verkü", "rzung", " der",
+            " Dauer", " zur", " Behebung", "\n", "*", "  ", " Monit", "oring ", "/", " Dash", "board", ":", " Sämt", "liche",
+            " Anlagen", " auf", " einen", " Blick", "\n", "*  ", " Möglich", "keit ", "Na", "chrichten ", "zu", " versenden",
+            " beim", " Erreic", "hen ", "vo", "n Grenz", "werten", "\n", "*  ", " Mit ", "LT", "E ", "oder ", "Kundenn", "etzwerk",
+            " möglich", "\n", "*", "   Kein", " Zugriff ", "ohne", " Einwi", "lligung", " des", " Anwenders", "\n", "\n",
+            "[", "Image", " of", " two", " people", " in", " lab", " coats", " and", " hair", "nets", " working", " at", " a",
+            " laboratory", " bench", "]", "\n", "\n", "#", " SKAN", " connect", "\n", "\n",
+            "*   Fernw", "artung", ", ", "direkte", " Verb", "indung", " zum", " Service", "-", "Experten", ":",
+            " Störun", "gen", " direkt", " lös", "en ", "bzw.", " Verkü", "rzung", " der", " Dauer", " zur", " Behebung", "\n",
+            "*   Monit", "oring ", "/", " Dash", "board", ":", " Sämt", "liche", " Anlagen", " auf", " einen", " Blick", "\n",
+            "*   Möglich", "keit ", "Na", "chrichten ", "zu", " versenden", " beim", " Erreic", "hen ", "vo", "n Grenz", "werten", "\n",
+            "*   Mit ", "LT", "E ", "oder ", "Kundenn", "etzwerk", " möglich", "\n",
+            "*   Kein", " Zugriff ", "ohne", " Einwi", "lligung", " des", " Anwenders", "\n", "\n",
+            "[", "Image", " of", " a", " person", " in", " a", " lab", " coat", " and", " hair", "net", " working", " at", " a",
+            " laboratory", " bench", "]", "\n", "\n", "#", " SKAN", " connect", "\n", "\n",
+            "*   Fernw", "artung", ", ", "direkte", " Verb", "indung", " zum", " Service", "-", "Experten", ":",
+            " Störun", "gen", " direkt", " lös", "en ", "bzw.", " Verkü", "rzung", " der", " Dauer", " zur", " Behebung", "\n",
+            "*   Monit", "oring ", "/", " Dash", "board", ":", " Sämt", "liche", " Anlagen", " auf", " einen", " Blick", "\n",
+            "*   Möglich", "keit ", "Na", "chrichten ", "zu", " versenden", " beim", " Erreic", "hen ", "vo", "n Grenz", "werten", "\n",
+            "*   Mit ", "LT", "E ", "oder ", "Kundenn", "etzwerk", " möglich", "\n",
+            "*   Kein", " Zugriff ", "ohne", " Einwi", "lligung", " des", " Anwenders", "\n", "\n",
+            "[", "Image", " of", " a", " person", " in", " a", " lab", " coat", " and", " hair", "net", " working", " at", " a",
+            " laboratory", " bench", "]", "\n", "\n", "#", " SKAN", " connect", "\n", "\n",
+            "*   Fernw", "artung", ", ", "direkte", " Verb", "indung", " zum", " Service", "-", "Experten", ":",
+            " Störun", "gen", " direkt", " lös", "en ", "bzw.", " Verkü", "rzung", " der", " Dauer", " zur", " Behebung", "\n",
+            "*   Monit", "oring ", "/", " Dash", "board", ":", " Sämt", "liche", " Anlagen", " auf", " einen", " Blick", "\n",
+            "*   Möglich", "keit ", "Na", "chrichten ", "zu", " versenden", " beim", " Erreic", "hen ", "vo", "n Grenz", "werten", "\n",
+            "*   Mit ", "LT", "E ", "oder ", "Kundenn", "etzwerk", " möglich", "\n",
+            "*   Kein", " Zugriff ", "ohne", " Einwi", "lligung", " des", " Anwenders", "\n", "\n",
+            "[", "Image", " of", " a", " person", " in", " a", " lab", " coat", " and", " hair", "net", " working", " at", " a",
+            " laboratory", " bench", "]"
+        };
+
+        List<KeyValuePair<string, double>> flagged = new List<KeyValuePair<string, double>>();
+        foreach (string token in tokens)
+        {
+            scorer.AddTokens(token);
+            flagged = scorer.GetAllScores(onlyReturnFlagged: false);
+            if (flagged.Any())
+                _TestOutputHelper.WriteLine(flagged[0].Value.ToString());
+        }
+
+        Assert.NotEmpty(flagged);
+    }
+    [Fact]
+    public void LongNGram_ScoringWorks2()
+    {
+        var scorer = new ProgressingNGramRepetitionScore(ngramLength: 3);
+        List<string> tokens = new List<string>()
+        {
+            "#"," SK","AN"," Service"," Update"," ","202","3","##"," Fern","wart","ung"," und"," Über","w","ach","ung",
+            "###"," All","sch","wil",","," ","10",".","05",".","202","3","[","Image"," of"," two"," people"," in"," a laboratory",
+            " setting","]","*","  "," **","SK","AN"," Service"," Update"," ","202","3","**","   "," *","  "," Fern",
+            "wart","ung"," und"," Über","w","ach","ung","","   "," *","  "," All","sch","wil",","," ","10",".","05",".",
+            "202","3","","*","  "," [","Image"," of"," two"," people"," in"," a laboratory"," setting","]","``",
+            "`","Note",":"," The"," image"," is"," not"," included"," in"," the"," trans","cribed"," document",
+            " page"," as it"," cannot"," be"," represented"," in"," text"," format",".","","#"," SK","AN"," Service"," Update"," ","202",
+            "3","              ","##"," Fern","wart","ung"," und"," Über","w","ach","ung","","###"," All","sch",
+            "wil",","," ","10",".","05",".","202","3","","[","Image"," of"," two"," people"," in"," a laboratory",
+            " setting","]","*","  "," **","SK","AN"," Service"," Update"," ","202","3","**","   "," *","  ",
+            " Fern","wart","ung"," und"," Über","w","ach","ung","","   "," *","  "," All","sch","wil",","," ",
+            "10",".","05",".","202","3","","*","  "," [","Image"," of"," two"," people"," in",
+            " a laboratory"," setting","]","``","`","Note",":"," The"," image"," is"," not"," included",
+            " in"," the"," trans","cribed"," document"," page"," as it"," cannot"," be"," represented",
+            " in"," text"," format",".","","#"," SK","AN"," Service"," Update"," ","202","3","         ","##"," Fern",
+            "wart","ung"," und"," Über","w","ach","ung","","###"," All","sch","wil",","," ","10",".","05",".","202","3",
+            "","[","Image"," of"," two"," people"," in"," a laboratory"," setting","]","*","  "," **","SK","AN",
+            " Service"," Update"," ","202","3","**","   "," *","  "," Fern","wart","ung"," und"," Über","w","ach",
+            "ung","","   "," *","  "," All","sch","wil",","," ","10",".","05",".","202","3","","*","  "," [","Image",
+            " of"," two"," people"," in"," a laboratory"," setting","]","``","`","Note",":"," The"," image"," is",
+            " not"," included"," in"," the"," trans","cribed"," document"," page"," as it"," cannot"," be",
+            " represented"," in"," text"," format",".","","#"," SK","AN"," Service"," Update"," ","202","3",
+            "                    ","##"," Fern","wart","ung"," und"," Über","w","ach","ung","","###"," All","sch",
+            "wil",","," ","10",".","05",".","202","3","","[","Image"," of"," two"," people"," in"," a laboratory",
+            " setting","]","*","  "," **","SK","AN"," Service"," Update"," ","202","3","**","   "," *","  "," Fern",
+            "wart","ung"," und"," Über","w","ach","ung","","   "," *","  "," All","sch","wil",","," ","10",".","05",
+            ".","202","3","","*","  "," [","Image"," of"," two"," people"," in"," a laboratory"," setting","]",
+            "``","`","Note",":"," The"," image"," is"," not"," included"," in"," the"," trans","cribed",
+            " document"," page"," as it"," cannot"," be"," represented"," in"," text"," format",".","",
+            "#"," SK","AN"," Service"
+        };
 
         List<KeyValuePair<string, double>> flagged = new List<KeyValuePair<string, double>>();
         foreach (string token in tokens)
