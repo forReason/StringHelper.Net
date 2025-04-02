@@ -63,8 +63,10 @@ public class ProgressingNGramRepetitionScore
         if (ContainsWordBoundary(tokenChunk))
         {
             string chunk = _PhraseBuilder.ToString();
-            _PhraseBuilder.Clear();
             List<string> words = Tokenize(chunk);
+            if (words.Count <= 1)
+                return;
+            _PhraseBuilder.Clear();
             if (!EndsWithWordBoundary(tokenChunk))
             {
                 _PhraseBuilder.Append(words[^1]);
