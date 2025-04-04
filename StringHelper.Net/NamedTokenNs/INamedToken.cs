@@ -1,4 +1,4 @@
-﻿namespace StringHelper.Net.NamedToken;
+﻿namespace StringHelper.Net.NamedTokenNs;
 
 public interface INamedToken : IEquatable<INamedToken>, IComparable<INamedToken>
 {
