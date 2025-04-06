@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -16,9 +16,13 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.5.2</Version>
-    <PackageReleaseNotes>1.5.2
+    <Version>1.6.0</Version>
+    <PackageReleaseNotes>1.6.0
+Added NamedToken Namespace, useful for tagging and string deduplication
+
+1.5.3
 Add decaying ngram score
+Add Progressing NgramRepetitionScore for calculating repetition on the fly
 
 1.5.0
 - addsome string calculations (levenshtein distance and ngram repetition score
@@ -85,6 +89,7 @@ target .net 6 &amp; 7</PackageReleaseNotes>
 
   <ItemGroup>
     <PackageReference Include="FlowEncrypt" Version="1.1.0" />
+    <PackageReference Include="Multithreading_Library" Version="2.5.1" />
   </ItemGroup>
 
 </Project>
