@@ -16,8 +16,8 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.5.1</Version>
-    <PackageReleaseNotes>1.5.1
+    <Version>1.5.2</Version>
+    <PackageReleaseNotes>1.5.2
 Add decaying ngram score
 
 1.5.0
