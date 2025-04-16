@@ -1,10 +1,10 @@
-﻿using StringHelper.Net.NamedTokenNs;
+﻿using StringHelper.Net.Metadata.Token;
 
 namespace StringHelper.Net.XUnitText.NamedTokenTests;
 
 public class NamedTokenPoolTests
 {
-    private NamedTokenPool<NamedTokenNs.NamedToken> CreatePool() =>
+    private NamedTokenPool<NamedToken> CreatePool() =>
         new NamedTokenPool<NamedToken>((id, name) => new NamedToken(id, name));
 
     [Fact]

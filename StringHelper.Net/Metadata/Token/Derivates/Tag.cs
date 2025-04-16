@@ -1,4 +1,4 @@
-﻿namespace StringHelper.Net.NamedTokenNs;
+﻿namespace StringHelper.Net.Metadata.Token.Derivates;
 
 /// <summary>
 /// Represents a uniquely identified tag with a globally unique <see cref="Guid"/> and a string <see cref="Name"/>.
@@ -29,8 +29,8 @@ public sealed class Tag : INamedToken
     /// <param name="name">The name of the tag. It should already be trimmed and validated externally.</param>
     public Tag(Guid id, string name)
     {
-        Id = id;
-        Name = name;
+        this.Id = id;
+        this.Name = name;
         _HashCode = id.GetHashCode();
     }
 
@@ -51,7 +51,7 @@ public sealed class Tag : INamedToken
         if (ReferenceEquals(this, other)) return true;
         if (other is null) return false;
 
-        return Id == other.Id;
+        return this.Id == other.Id;
     }
 
     /// <summary>
@@ -87,6 +87,6 @@ public sealed class Tag : INamedToken
     public int CompareTo(INamedToken? other)
     {
         if (other is null) return 1;
-        return string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        return string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace StringHelper.Net.NamedTokenNs;
+﻿namespace StringHelper.Net.Metadata.Token.Derivates;
 
 /// <summary>
 /// Represents a uniquely identified named token with a globally unique <see cref="Guid"/> and a string <see cref="Name"/>.
@@ -8,7 +8,7 @@
 /// This class is typically used in conjunction with <see cref="NamedTokenPool{T}"/> to ensure deduplicated usage of named values,
 /// such as tags, metadata keys, or similar domain-specific identifiers.
 /// </remarks>
-public sealed class NamedToken : INamedToken
+public sealed class FieldName : INamedToken
 {
     /// <summary>
     /// Gets the globally unique identifier for this token.
@@ -28,7 +28,7 @@ public sealed class NamedToken : INamedToken
     /// </summary>
     /// <param name="id">The globally unique identifier for the token.</param>
     /// <param name="name">The name of the token. It should already be trimmed and validated externally.</param>
-    public NamedToken(Guid id, string name)
+    public FieldName(Guid id, string name)
     {
         this.Id = id;
         this.Name = name;
@@ -67,7 +67,7 @@ public sealed class NamedToken : INamedToken
     /// <param name="left">The first token to compare.</param>
     /// <param name="right">The second token to compare.</param>
     /// <returns><c>true</c> if both tokens have the same ID or are the same instance; otherwise, <c>false</c>.</returns>
-    public static bool operator ==(NamedToken? left, NamedToken? right) => Equals(left, right);
+    public static bool operator ==(FieldName? left, FieldName? right) => Equals(left, right);
 
     /// <summary>
     /// Determines whether two tokens are not equal by comparing their IDs.
@@ -75,7 +75,7 @@ public sealed class NamedToken : INamedToken
     /// <param name="left">The first token to compare.</param>
     /// <param name="right">The second token to compare.</param>
     /// <returns><c>true</c> if the tokens have different IDs; otherwise, <c>false</c>.</returns>
-    public static bool operator !=(NamedToken? left, NamedToken? right) => !Equals(left, right);
+    public static bool operator !=(FieldName? left, FieldName? right) => !Equals(left, right);
 
     /// <summary>
     /// Compares the current token with another token by name, ignoring case.

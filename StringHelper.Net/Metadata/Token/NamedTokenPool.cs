@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using Multithreading_Library.ThreadControl;
 
-namespace StringHelper.Net.NamedTokenNs;
+namespace StringHelper.Net.Metadata.Token;
 
 /// <summary>
 /// A thread-safe pool for managing and deduplicating named tokens of type <typeparamref name="T"/>.

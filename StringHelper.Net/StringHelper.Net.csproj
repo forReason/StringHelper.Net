@@ -16,56 +16,9 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.6.0</Version>
-    <PackageReleaseNotes>1.6.0
-Added NamedToken Namespace, useful for tagging and string deduplication
-
-1.5.3
-Add decaying ngram score
-Add Progressing NgramRepetitionScore for calculating repetition on the fly
-
-1.5.0
-- addsome string calculations (levenshtein distance and ngram repetition score
-
-1.4.9
-add variance counter
-
-1.4.8
-- several updates and fixes to wordfilter
-
-1.4.0
-add word filter functions which can check for wordsequences efficiently by building a decision tree
-
-1.3.4
-- add tagize function
-
-1.3.3
-- Add chunk string function
-
-1.3.0
-Added taggize function
-
-1.2.7
-- updated FindJsonInText
-
-1.2.6
-- small update on json extractor
-
-1.2.5
-- add unit tests for json finder, fix json finder function
-
-1.2.3
-- added function to find a json in text
-
-1.2.1
-- expanded the invary string function with optional white space replacement and optional deduplication of characters
-
-1.1.0
-- implement character occurrence counting
-- add .net 8 targeting
-
-1.0.1
-target .net 6 &amp; 7</PackageReleaseNotes>
+    <Version>1.7.0</Version>
+    <PackageReleaseNotes>- Moved Namespace for namet tokens
+- Introduced metadata fields with deduplication</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
