@@ -16,7 +16,7 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.7.0</Version>
+    <Version>1.7.3</Version>
     <PackageReleaseNotes>- Moved Namespace for namet tokens
 - Introduced metadata fields with deduplication</PackageReleaseNotes>
   </PropertyGroup>
