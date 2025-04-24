@@ -8,6 +8,9 @@ public class StringFieldPool
 {
     public NamedTokenPool<FieldName> FieldNames = new ((id, name) => new FieldName(id, name));
     public NamedTokenPool<FieldValue> FieldValues = new ((id, name) => new FieldValue(id, name));
+
+    public ConcurrentDictionary<(FieldName, FieldValue), StringField> AllFields
+        = new ConcurrentDictionary<(FieldName, FieldValue), StringField>();
     public StringField GetStringField(string fieldName, string fieldValue)
     {
         FieldName name = FieldNames.GetOrCreateToken(fieldName);
@@ -18,6 +21,12 @@ public class StringFieldPool
         }
         return field;
     }
-    public ConcurrentDictionary<(FieldName, FieldValue), StringField> AllFields
-        = new ConcurrentDictionary<(FieldName, FieldValue), StringField>();
+    public StringField InsertStringField(StringField field)
+    {
+        if (!AllFields.TryGetValue((field.FieldName,field.Value), out StringField? existingField))
+        {
+            AllFields[(field.FieldName,field.Value)] = existingField = new StringField(field.FieldName,field.Value);
+        }
+        return existingField;
+    }
 }
