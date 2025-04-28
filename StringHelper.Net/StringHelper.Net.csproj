@@ -16,9 +16,9 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.7.6</Version>
-    <PackageReleaseNotes>- Moved Namespace for namet tokens
-- Introduced metadata fields with deduplication</PackageReleaseNotes>
+    <Version>1.7.7</Version>
+    <PackageReleaseNotes>- improve stringfield
+- add stringfield removal option</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

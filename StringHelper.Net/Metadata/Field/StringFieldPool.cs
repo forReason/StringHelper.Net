@@ -38,4 +38,25 @@ public class StringFieldPool
         }
         return fields;
     }
+
+    public void RemoveStringField(StringField field)
+    {
+        bool success = AllFields.TryRemove((field.FieldName, field.Value), out _);
+        if (!success)
+            return;
+
+        // Now check if the FieldName and FieldValue are still used
+        bool fieldNameStillUsed = AllFields.Keys.Any(k => k.Item1 == field.FieldName);
+        bool fieldValueStillUsed = AllFields.Keys.Any(k => k.Item2 == field.Value);
+
+        if (!fieldNameStillUsed)
+        {
+            FieldNames.RemoveToken(field.FieldName);
+        }
+        if (!fieldValueStillUsed)
+        {
+            FieldValues.RemoveToken(field.Value);
+        }
+    }
+
 }
