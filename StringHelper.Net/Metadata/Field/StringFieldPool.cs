@@ -15,7 +15,7 @@ public class StringFieldPool
     private readonly ConcurrentDictionary<FieldName, int> _fieldNameRefCount = new();
     private readonly ConcurrentDictionary<FieldValue, int> _fieldValueRefCount = new();
 
-    public StringField GetStringField(string fieldName, string fieldValue)
+    public StringField GetOrCreateStringField(string fieldName, string fieldValue)
     {
         FieldName name = FieldNames.GetOrCreateToken(fieldName);
         FieldValue value = FieldValues.GetOrCreateToken(fieldValue);
@@ -31,6 +31,15 @@ public class StringFieldPool
         }
 
         return field;
+    }
+    public List<StringField> GetOrCreateStringFields(IEnumerable<(string fieldName, string fieldValue)> fields)
+    {
+        List<StringField> insertedFields = new();
+        foreach (var f in fields)
+        {
+            GetOrCreateStringField(f.fieldName, f.fieldValue);
+        }
+        return insertedFields;
     }
 
     public StringField InsertStringField(StringField field)

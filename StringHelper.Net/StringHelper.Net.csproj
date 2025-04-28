@@ -16,7 +16,7 @@
     <PackageLicenseExpression>MIT-Modern-Variant</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.7.8</Version>
+    <Version>1.7.9</Version>
     <PackageReleaseNotes>- improve stringfield
 - add stringfield removal option
 - add reference counting for stringfields and stringfield removals</PackageReleaseNotes>
