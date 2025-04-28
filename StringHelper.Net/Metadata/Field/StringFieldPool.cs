@@ -29,4 +29,13 @@ public class StringFieldPool
         }
         return existingField;
     }
+    public List<StringField> InsertStringFields(IEnumerable<StringField> field)
+    {
+        List<StringField> fields = new List<StringField>();
+        foreach (var f in field)
+        {
+            fields.Add(InsertStringField(f));
+        }
+        return fields;
+    }
 }
